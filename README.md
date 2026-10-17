@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Recap
 
-## Getting Started
+A personal meeting notetaker. Upload a recording or paste a transcript, name the speakers, and get a summary, the decisions and your action items with real due dates.
 
-First, run the development server:
+This repo is **week 2 of the build plan: the notes engine**. Storage and the dashboard come in week 3, and the Chrome extension in weeks 4–6.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # add your AssemblyAI and Anthropic keys
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Variable | Required | What it does |
+| --- | --- | --- |
+| `ASSEMBLYAI_API_KEY` | yes | Transcription and speaker labels |
+| `ANTHROPIC_API_KEY` | yes | Writes the notes |
+| `ANTHROPIC_MODEL` | no | Defaults to `claude-sonnet-5-5` |
+| `OWNER_NAME` | no | Your name as people say it in meetings. Action items are only yours. |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How it works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Add meeting.** An upload goes to `POST /api/transcriptions`, which sends it to AssemblyAI (Universal-3.5 Pro with speaker labels) and returns an id. The page polls `GET /api/transcriptions/[id]` every 3 seconds. A pasted transcript is parsed in the browser instead (`src/lib/parse-transcript.ts` reads Tactiq exports, `[00:05] Name:` and `Name: text`).
+2. **Name speakers.** "Speaker A" becomes a real name before anything is summarised, so the notes use names.
+3. **Notes.** `POST /api/notes` sends the named transcript to Claude with a JSON schema (structured outputs). Spoken deadlines such as "by Thursday" are turned into dates against the meeting date (`src/lib/due-dates.ts`). Each action item links back to the moment it was said.
 
-## Learn More
+```
+src/
+  app/
+    page.tsx                         renders the notes engine
+    api/transcriptions/route.ts      upload → AssemblyAI
+    api/transcriptions/[id]/route.ts poll status
+    api/notes/route.ts               transcript → notes
+  components/
+    notes-engine.tsx                 the three-step client UI
+    ui.tsx                           Button, Avatar, StatusBadge, Banner… (from the Figma design system)
+  lib/
+    assemblyai.ts  notes.ts  parse-transcript.ts  due-dates.ts  format.ts  markdown.ts  validation.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+Design tokens in `src/app/globals.css` mirror the Figma variables (light and dark). Headings use DM Sans, body text Geist, and timestamps Geist Mono.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Checks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm test          # vitest: parser, dates, notes, AssemblyAI client, routes
+npm run lint
+npm run build
+```
 
-## Deploy on Vercel
+## Known limits (fixed in week 3)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Run locally for now.** Vercel functions accept request bodies up to 4.5 MB, so uploads would fail there. Week 3 uploads straight to Supabase Storage and passes AssemblyAI a signed URL.
+- Nothing is saved yet. Refreshing the page loses the meeting. Use **Copy Markdown** to keep notes.
+- Audio is never stored by Recap. AssemblyAI keeps the upload until the transcript is deleted.

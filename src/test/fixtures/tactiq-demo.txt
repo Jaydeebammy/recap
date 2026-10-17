@@ -1,0 +1,53 @@
+My First Hello, World! Meeting
+Meeting started: Oct 16, 2026, 11:20:10 AM
+Meeting duration: 5 minutes
+Meeting participants: Ben, Chris, Sasha, Amelia
+View original transcript at Tactiq.
+Transcript
+00:00 Ben : Welcome, everyone! Today, we're exploring how Tactiq can 
+transform your meetings into productive outcomes.
+00:20 Ben : Whether it’s summarizing discussions, updating your CRM, or 
+creating actionable items, Tactiq ensures you spend more time on what matters.
+00:40 Chris : That sounds exciting, Ben. Where do we start?
+01:00 Ben : Great question, Chris. Let’s dive into a typical use case—planning a 
+product launch. Sasha, could you share the current timeline for the launch?
+01:10 Sasha : Sure! The launch is set for three weeks from today, so we need to 
+finalize our deliverables soon. I’ve drafted a rough timeline, but it needs some 
+updates.
+01:32 Amelia : I’ll ensure the final content approvals are complete by Thursday. 
+Marketing is on track, but I’ll need to coordinate with design for the final visuals.
+01:52 Chris : I’ll align with design team and notify them of the launch schedule. 
+Sales is ready to go, but we’ll need updated product specs for client discussions.
+02:12 Sasha : That’s great to hear. I’ll prioritize the final testing phase by the 
+end of this week and confirm with the engineering team on readiness.
+02:32 Ben : Perfect. Now, let me show you how Tactiq captures and organizes 
+this information. Tactiq automatically generates action items for us!
+03:52 Chris : That’s amazing! Can Tactiq share these directly with our team or 
+tools like Slack?
+04:12 Ben : Absolutely! You can set up workflows to send these updates via 
+Slack, email, or even update your CRM automatically. Let’s see how it works.
+04:32 Amelia : What about adding these to a project management tool like Jira? 
+We typically track tasks there.
+04:52 Ben : Great point, Amelia. With our AI Workflow Builder, you can create 
+project tickets directly from these action items. Let’s try it now.
+05:12 Ben : Click on an action item to assign it to a team member and set a 
+deadline. I’ve just created a Jira ticket for the testing phase.
+05:32 Sasha : Wow, that’s intuitive! I can already see how this will save time and 
+ensure nothing falls through the cracks.
+05:52 Ben : That’s the idea! This is how Tactiq helps automate follow-ups and 
+reduce manual work. Do you have any other questions?
+06:12 Chris : How customizable are the workflows? For example, can we create 
+different workflows for different teams?
+06:32 Ben : Very customizable! You can tailor workflows to specific teams, 
+projects, or even recurring tasks. Plus, you can reuse templates for consistency.
+06:52 Amelia : That’s a game-changer for keeping everyone aligned. Can we also 
+create templates for new team members to get started quickly?
+07:12 Ben : Definitely. Tactiq has pre-built workflow templates, and you can also 
+design your own. This way, onboarding becomes seamless.
+07:32 Chris : I love how this tool takes the guesswork out of meetings. Is there 
+a way to analyze past meeting data for trends?
+08:12 Ben : All right, let’s recap what we’ve seen today. Tactiq automates action 
+items, integrates with your tools, and saves you valuable time after meetings.
+08:32 Ben : Start your free trial today and let Tactiq automate your post-
+meeting workflows. Thanks for joining, everyone!
+View original transcript at Tactiq.

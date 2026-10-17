@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
+/* Design tokens — mirrors the Figma "Primitives" and "Color" collections. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --sand-0: #ffffff; --sand-50: #faf9f6; --sand-100: #f3f1ec; --sand-200: #e8e5de; --sand-300: #d9d5cc;
+  --sand-400: #b5b0a5; --sand-500: #8c877c; --sand-600: #6b675e; --sand-700: #4d4a43; --sand-800: #33312d;
+  --sand-900: #22211e; --sand-950: #161513;
+  --pine-50: #edf5f2; --pine-200: #a8d1c2; --pine-300: #74b49e; --pine-400: #46927a; --pine-500: #2c7a63;
+  --pine-600: #1f6351; --pine-700: #184f41; --pine-800: #133f34; --pine-900: #0e2e26;
+  --red-50: #fdeded; --red-400: #f07276; --red-500: #e5484d; --red-600: #cc3438; --red-700: #a6282c; --red-900: #4a1416;
+  --amber-50: #fdf5e6; --amber-400: #f2b43c; --amber-500: #da9a1b; --amber-700: #8f5e05; --amber-900: #3d2a07;
+  --blue-50: #eef2fd; --blue-400: #6e8ff0; --blue-500: #3e63dd; --blue-700: #2a44a0; --blue-900: #18234f;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-canvas: var(--sand-50);
+  --color-bg-surface: var(--sand-0);
+  --color-bg-subtle: var(--sand-100);
+  --color-bg-hover: var(--sand-200);
+  --color-bg-pressed: var(--sand-300);
+  --color-bg-brand: var(--pine-600);
+  --color-bg-brand-hover: var(--pine-700);
+  --color-bg-brand-subtle: var(--pine-50);
+  --color-bg-record: var(--red-500);
+  --color-bg-record-subtle: var(--red-50);
+  --color-bg-warning-subtle: var(--amber-50);
+  --color-bg-info-subtle: var(--blue-50);
+  --color-bg-disabled: var(--sand-200);
+  --color-text-primary: var(--sand-900);
+  --color-text-secondary: var(--sand-600);
+  --color-text-tertiary: var(--sand-500);
+  --color-text-on-brand: var(--sand-0);
+  --color-text-brand: var(--pine-600);
+  --color-text-record: var(--red-600);
+  --color-text-warning: var(--amber-700);
+  --color-text-info: var(--blue-700);
+  --color-text-disabled: var(--sand-400);
+  --color-border-default: var(--sand-200);
+  --color-border-strong: var(--sand-300);
+  --color-border-subtle: var(--sand-100);
+  --color-border-focus: var(--pine-500);
+  --color-border-record: var(--red-500);
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --color-bg-canvas: var(--sand-950);
+    --color-bg-surface: var(--sand-900);
+    --color-bg-subtle: var(--sand-800);
+    --color-bg-hover: var(--sand-700);
+    --color-bg-pressed: var(--sand-600);
+    --color-bg-brand: var(--pine-400);
+    --color-bg-brand-hover: var(--pine-300);
+    --color-bg-brand-subtle: var(--pine-900);
+    --color-bg-record-subtle: var(--red-900);
+    --color-bg-warning-subtle: var(--amber-900);
+    --color-bg-info-subtle: var(--blue-900);
+    --color-bg-disabled: var(--sand-800);
+    --color-text-primary: var(--sand-50);
+    --color-text-secondary: var(--sand-400);
+    --color-text-on-brand: var(--sand-950);
+    --color-text-brand: var(--pine-300);
+    --color-text-record: var(--red-400);
+    --color-text-warning: var(--amber-400);
+    --color-text-info: var(--blue-400);
+    --color-text-disabled: var(--sand-600);
+    --color-border-default: var(--sand-700);
+    --color-border-strong: var(--sand-600);
+    --color-border-subtle: var(--sand-800);
+    --color-border-focus: var(--pine-300);
+    --color-border-record: var(--red-400);
+    color-scheme: dark;
   }
 }
 
+@theme inline {
+  --color-canvas: var(--color-bg-canvas);
+  --color-surface: var(--color-bg-surface);
+  --color-subtle: var(--color-bg-subtle);
+  --color-hover: var(--color-bg-hover);
+  --color-pressed: var(--color-bg-pressed);
+  --color-brand: var(--color-bg-brand);
+  --color-brand-hover: var(--color-bg-brand-hover);
+  --color-brand-subtle: var(--color-bg-brand-subtle);
+  --color-record: var(--color-bg-record);
+  --color-record-subtle: var(--color-bg-record-subtle);
+  --color-warning-subtle: var(--color-bg-warning-subtle);
+  --color-info-subtle: var(--color-bg-info-subtle);
+  --color-disabled: var(--color-bg-disabled);
+  --color-fg: var(--color-text-primary);
+  --color-fg-2: var(--color-text-secondary);
+  --color-fg-3: var(--color-text-tertiary);
+  --color-on-brand: var(--color-text-on-brand);
+  --color-brand-fg: var(--color-text-brand);
+  --color-record-fg: var(--color-text-record);
+  --color-warning-fg: var(--color-text-warning);
+  --color-info-fg: var(--color-text-info);
+  --color-line: var(--color-border-default);
+  --color-line-strong: var(--color-border-strong);
+  --color-line-subtle: var(--color-border-subtle);
+  --color-focus: var(--color-border-focus);
+  --color-record-line: var(--color-border-record);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
 }
